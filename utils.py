@@ -30,6 +30,16 @@ class ChatBot(object):
     
     # Normalize input sentence and call evaluate()
     def respone(self, sentence, max_length):
-        output_words = self.evaluate(sentence, max_length)
-        output_words[:] = [x for x in output_words if not (x == 'EOS' or x == 'PAD')]
-        return ' '.join(output_words)
+        res = ' '
+        try:
+            output_words = self.evaluate(sentence, max_length)
+            output_words[:] = [x for x in output_words if not (x == 'EOS' or x == 'PAD')]
+            res = res.join(output_words)
+
+        except KeyError:
+            res = 'Xin lũi từ này tui chưa được học'
+        
+        return res
+
+
+        
